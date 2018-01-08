@@ -3,21 +3,23 @@
   :license {:name "Eclipse"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :url "https://github.com/tonsky/datascript"
-  
+
   :dependencies [
-    [org.clojure/clojure "1.7.0" :scope "provided"]
-    [org.clojure/clojurescript "1.7.228" :scope "provided"]
+;;     [org.clojure/clojure "1.7.0" :scope "provided"]
+;;     [org.clojure/clojurescript "1.7.228" :scope "provided"]
+    [org.clojure/clojure "1.9.0-alpha16" :scope "provided"]
+                 [org.clojure/clojurescript "1.9.542" :scope "provided"]
   ]
-  
+
   :plugins [
     [lein-cljsbuild "1.1.5"]
   ]
-  
+
   :global-vars {
     *warn-on-reflection* true
 ;;     *unchecked-math* :warn-on-boxed
   }
-  
+
   :jvm-opts ["-Xmx2g" "-server"]
 
   :aliases {"test-clj"     ["run" "-m" "datascript.test/test-most"]
@@ -30,8 +32,8 @@
                                  ["run" "-m" "datascript.test/test-node" "--all"]]
             "test-1.8"     ["with-profile" "dev,1.8" "test-all"]
             "test-1.9"     ["with-profile" "dev,1.9" "test-all"]}
-  
-  :cljsbuild { 
+
+  :cljsbuild {
     :builds [
       { :id "release"
         :source-paths ["src" "bench/src"]
@@ -41,12 +43,12 @@
           :optimizations :advanced
           :pretty-print  false
           :elide-asserts true
-          :output-wrapper false 
+          :output-wrapper false
           :parallel-build true
           :checked-arrays :warn
         }
         :notify-command ["release-js/wrap_bare.sh"]}
-              
+
       { :id "advanced"
         :source-paths ["src" "bench/src" "test"]
         :compiler {
@@ -58,7 +60,7 @@
           :parallel-build true
           :checked-arrays :warn
         }}
-              
+
       { :id "none"
         :source-paths ["src" "bench/src" "test" "dev"]
         :compiler {
@@ -83,7 +85,7 @@
     :dev { :source-paths ["bench/src" "test" "dev"]
            :dependencies [[org.clojure/tools.nrepl "0.2.12"]] }
   }
-  
+
   :clean-targets ^{:protect false} [
     "target"
     "release-js/datascript.bare.js"
